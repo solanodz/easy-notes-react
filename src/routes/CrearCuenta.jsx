@@ -4,15 +4,12 @@ import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/config"
 import { Button } from "@nextui-org/react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CrearCuenta = () => {
 
     const notify = () => {
-        toast.success("Cuenta creada con éxito", {
-            position: toast.POSITION.TOP_CENTER,
-        });
+        toast('Cuenta creada con éxito');
     }
 
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
@@ -57,7 +54,7 @@ const CrearCuenta = () => {
 
     return (
         <div className="h-screen mt-20">
-            <h1 className="font-titulos pt-12 pb-4 text-verdeOscuro font-semibold text-4xl">
+            <h1 className="font-titulos pt-12 pb-4 text-celeste font-semibold text-4xl">
                 Crear Cuenta
             </h1>
             <form
@@ -70,7 +67,7 @@ const CrearCuenta = () => {
                     {...register("email", { required: true })}
                     type="email"
                     placeholder="Email"
-                    className="bg-blanco mt-4 p-2 font-medium text-textos placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-verdeOscuro placeholder-secundario text-sm"
+                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
                 />
                 <p className="text-rojo text-xs text-left font-medium">
                     {errors.email?.type === "required" &&
@@ -90,7 +87,7 @@ const CrearCuenta = () => {
                         },
                     })}
                     placeholder="Crear Contraseña"
-                    className="bg-blanco mt-4 p-2 font-medium text-textos placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-verdeOscuro placeholder-secundario text-sm"
+                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
                 />
                 {errors.password && <p className="text-rojo text-xs text-left font-medium">{errors.password.message}</p>}
                 <p className="text-rojo text-xs text-left font-medium">
@@ -109,16 +106,41 @@ const CrearCuenta = () => {
                     }
                     )}
                     placeholder="Repetir Contraseña"
-                    className="bg-blanco mt-4 p-2 font-medium text-textos placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-verdeOscuro placeholder-secundario text-sm"
+                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
                 />
                 {errors.repeatPassword && <p className="text-rojo text-xs text-left font-medium">{errors.repeatPassword.message}</p>}
 
-                <p className="text-sm mt-10 font-regular">¿Ya tienes una cuenta? <Link className="text-verdeOscuro font-medium" to='/iniciar-sesion'>Ingresa aquí</Link>.</p>
+                <p className="text-sm mt-10 font-regular">¿Ya tienes una cuenta? <Link className="text-celeste font-medium" to='/iniciar-sesion'>Ingresa aquí</Link>.</p>
 
-                <Button type="submit" className="z-0 m-10 bg-textos text-blanco w-fit mx-auto rounded-md hover:bg-blanco border-2 border-textos hover:text-textos">
+                <Button type="submit" onSubmit={notify} className="z-0 m-10 bg-negro text-blanco w-fit mx-auto rounded-md hover:bg-blanco border-2 border-negro hover:text-negro">
                     Enviar
                 </Button>
-                <ToastContainer autoClose={2500} theme="dark" />
+                {/* toasttttttttttt */}
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                    gutter={8}
+                    containerClassName=""
+                    containerStyle={{}}
+                    toastOptions={{
+                        // Define default options
+                        className: '',
+                        duration: 5000,
+                        style: {
+                            background: '#16a34a',
+                            color: '#fff',
+                        },
+
+                        // Default options for specific types
+                        success: {
+                            duration: 3000,
+                            theme: {
+                                primary: 'green',
+                                secondary: 'black',
+                            },
+                        },
+                    }}
+                />
             </form>
         </div>
     );

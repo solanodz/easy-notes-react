@@ -1,9 +1,18 @@
+#html{
+  background-color: #000000;
+}
+
 #root {
   max-width: 520px;
   margin: 0 auto;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #000000;
   font-family: 'Poppins', sans-serif;
+}
+
+
+body{
+  background-color: #000000;
 }
 
 .logo {

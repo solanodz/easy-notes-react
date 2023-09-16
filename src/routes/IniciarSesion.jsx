@@ -35,7 +35,7 @@ const IniciarSesion = () => {
 
     return (
         <div className="h-screen">
-            <h1 className="font-titulos pt-32 pb-4 text-verdeOscuro font-semibold text-4xl">
+            <h1 className="font-titulos pt-32 pb-4 text-celeste font-semibold text-4xl">
                 Iniciar Sesión
             </h1>
             <form
@@ -47,7 +47,7 @@ const IniciarSesion = () => {
                     {...register("email", { required: true })}
                     type="email"
                     placeholder="ingresa tu email"
-                    className="bg-blanco mt-4 p-2 font-medium text-textos placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-verdeOscuro placeholder-secundario text-sm"
+                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
                 />
                 <p className="text-rojo text-xs text-left font-medium">
                     {errors.email?.type === "required" &&
@@ -64,7 +64,7 @@ const IniciarSesion = () => {
                         },
                     })}
                     placeholder="Ingresa tu contraseña"
-                    className="bg-blanco mt-4 p-2 font-medium text-textos placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-verdeOscuro placeholder-secundario text-sm"
+                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
                 />
                 {errors.password && <p className="text-rojo text-xs text-left font-medium">{errors.password.message}</p>}
                 <p className="text-rojo text-xs text-left font-medium">
@@ -74,8 +74,8 @@ const IniciarSesion = () => {
                 {errorMessage && (
                     <p className="text-rojo text-xs text-left font-medium">{errorMessage}</p>
                 )}
-                <p className="text-sm mt-10 font-regular">¿No tienes una cuenta? <Link className="text-verdeOscuro font-medium" to='/crear-cuenta'>Ingresa aquí</Link>.</p>
-                <Button type="submit" className="m-10 bg-textos text-blanco w-fit mx-auto rounded-md hover:bg-blanco border-2 border-textos hover:text-textos">
+                <p className="text-sm mt-10 font-regular">¿No tienes una cuenta? <Link className="text-celeste font-medium" to='/crear-cuenta'>Ingresa aquí</Link>.</p>
+                <Button type="submit" className="m-10 bg-negro text-blanco w-fit mx-auto rounded-md hover:bg-blanco border-2 border-negro hover:text-negro">
                     Enviar
                 </Button>
             </form>

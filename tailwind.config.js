@@ -12,15 +12,17 @@ export default {
     colors: {
       "transparente": "transparent",
       "blanco": "#ffffff",
-      "textos": "#1C211F",
-      "verdeClaro": "#9FE4CB",
-      "verdeOscuro": "#00AD6F",
-      "secundario": "#a1a1a1",
-      "rojo": "#E46262"
+      "negro": "#000000",
+      "celeste": "#00A3FF",
+      "celesteClaro": "#12374C",
+      "gris": "#2f2f2f",
+      "grisClaro": "#9f9f9f",
+      "bordes": "#2d2d2d",
+      "rojo": "#dc2626"
     },
     fontFamily: {
       "titulos": "Poppins",
-      "textos": "IBM Plex Sans",
+      "negro": "IBM Plex Sans",
     }
   },
   darkMode: "class",

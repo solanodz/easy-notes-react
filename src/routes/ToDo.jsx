@@ -3,47 +3,59 @@
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 const ToDo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
 
-    const fecha = new Date()
-    const [horaCreacion, setHoraCreacion] = useState('');
+    const FechaCreacion = ({ createdAt }) => {
+        const [horaCreacion, setHoraCreacion] = useState('');
 
+        useEffect(() => {
+            const hora = new Date(createdAt).toLocaleTimeString();
+            setHoraCreacion(hora);
+        }, [createdAt]);
 
-    useEffect(() => {
-        const hora = new Date(task.createdAt).toLocaleTimeString();
-        setHoraCreacion(hora);
-    }, [task.createdAt]);
+        return (
+            <div className='flex flex-col text-right text-grisClaro py-1 text-xs font-titulos'>
+                <p className='mx-2'>{new Date(createdAt).toLocaleDateString()}</p>
+                <p className='mx-2'>{horaCreacion}</p>
+            </div>
+        );
+    }
 
     return (
-        <div className='font-textos font-regular m-2  bg-verdeClaro rounded-md items-center'>
-            <div className='flex flex-row mx-2 my-1 px-2 pt-2 justify-between'>
+        <div className='font-titulos shadow-lg p-1 bg-celesteClaro text-blanco font-regular m-2 rounded-md items-center'>
+
+            <div className='flex flex-row mx-2 items-center my-1 px-2 py-1 justify-between'>
                 <p
                     onClick={() => toggleComplete(task.id)}
-                    className={`text-left text-md ${task.completed ? 'line-through text-secundario' : ""}`}
+                    className={`text-left cursor-pointer z-10 text-md font-medium ${task.completed ? 'line-through text-celeste' : ""}`}
                 >
                     {task.task}</p>
-                <div className=''>
-                    <FontAwesomeIcon
-                        icon={faPenToSquare}
-                        size="lg"
-                        className='p-1 mx-2 text-verdeOscuro cursor-pointer hover:text-textos hover:scale-110   duration-200'
-                        onClick={() => editTodo(task.id)}
-                    />
-                    <FontAwesomeIcon
-                        icon={faTrash}
-                        size="lg"
-                        className='p-1 mx-2 text-verdeOscuro cursor-pointer hover:text-textos hover:scale-110   duration-200'
-                        onClick={() => deleteTodo(task.id)}
-                    />
+                <div className='text-right flex flex-col items-center'>
+                    <div className='flex flex-col text-right text-grisClaro py-1 text-xs font-titulos'>
+                        <FechaCreacion createdAt={task.createdAt} />
+                    </div>
+                    <div className='flex flex-row'>
+                        <FontAwesomeIcon
+                            icon={faPenToSquare}
+                            size="lg"
+                            className='p-1 mx-1 text-celeste cursor-pointer hover:text-blanco hover:scale-110 duration-200'
+                            onClick={() => editTodo(task.id)}
+                        />
+                        <FontAwesomeIcon
+                            icon={faTrash}
+                            size="lg"
+                            className='p-1 mx-1 text-celeste cursor-pointer hover:text-blanco hover:scale-110 duration-200'
+                            onClick={() => deleteTodo(task.id)}
+                        />
+                    </div>
+
+
                 </div>
             </div>
-            <div className='flex flex-row border-t-2 mx-3 border-verdeOscuro'>
-                <p className='mr-2 text-sm text-verdeOscuro font-titulos pb-1'>{fecha.toLocaleDateString()}</p>
-                <p className='mx-2 text-sm text-verdeOscuro font-titulos pb-1'>{horaCreacion}</p>
-            </div>
+
         </div>
     )
 }
