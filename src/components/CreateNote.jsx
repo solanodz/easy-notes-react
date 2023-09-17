@@ -1,18 +1,19 @@
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@nextui-org/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 import { ComponenteFecha, ComponenteTiempo } from './FechaHora'
 
-const CreateNote = ({ setNotes }) => {
+const CreateNote = () => {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const date = ComponenteFecha();
     const hour = ComponenteTiempo();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [notes, setNotes] = useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,6 +27,8 @@ const CreateNote = ({ setNotes }) => {
             navigate('/notes')
         }
     }
+
+
 
     return (
         <div className='mt-32 mx-2'>

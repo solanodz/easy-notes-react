@@ -67,7 +67,7 @@ const CrearCuenta = () => {
                     {...register("email", { required: true })}
                     type="email"
                     placeholder="Email"
-                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
+                    className="bg-negro mt-4 p-2 font-medium text-blanco placeholder:text-xs placeholder:italic placeholder:font-regular rounded-md border-2 border-gris placeholder-gris text-sm"
                 />
                 <p className="text-rojo text-xs text-left font-medium">
                     {errors.email?.type === "required" &&
@@ -87,7 +87,7 @@ const CrearCuenta = () => {
                         },
                     })}
                     placeholder="Crear Contraseña"
-                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
+                    className="bg-negro mt-4 p-2 font-medium text-blanco placeholder:text-xs placeholder:italic placeholder:font-regular rounded-md border-2 border-gris placeholder-gris text-sm"
                 />
                 {errors.password && <p className="text-rojo text-xs text-left font-medium">{errors.password.message}</p>}
                 <p className="text-rojo text-xs text-left font-medium">
@@ -106,13 +106,13 @@ const CrearCuenta = () => {
                     }
                     )}
                     placeholder="Repetir Contraseña"
-                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
+                    className="bg-negro mt-4 p-2 font-medium text-blanco placeholder:text-xs placeholder:italic placeholder:font-regular rounded-md border-2 border-gris placeholder-gris text-sm"
                 />
                 {errors.repeatPassword && <p className="text-rojo text-xs text-left font-medium">{errors.repeatPassword.message}</p>}
 
-                <p className="text-sm mt-10 font-regular">¿Ya tienes una cuenta? <Link className="text-celeste font-medium" to='/iniciar-sesion'>Ingresa aquí</Link>.</p>
+                <p className="text-sm mt-10 text-grisClaro font-regular">¿Ya tienes una cuenta? <Link className="text-celeste font-medium" to='/iniciar-sesion'>Ingresa aquí</Link>.</p>
 
-                <Button type="submit" onSubmit={notify} className="z-0 m-10 bg-negro text-blanco w-fit mx-auto rounded-md hover:bg-blanco border-2 border-negro hover:text-negro">
+                <Button type="submit" onSubmit={notify} className="flex m-12 p-2 px-3 w-fit mx-auto text-negro font-titulos font-regular bg-blanco border-blanco border-2 rounded-lg hover:bg-negro hover:text-blanco duration-200">
                     Enviar
                 </Button>
                 {/* toasttttttttttt */}
@@ -127,8 +127,9 @@ const CrearCuenta = () => {
                         className: '',
                         duration: 5000,
                         style: {
-                            background: '#16a34a',
+                            background: '#12374C',
                             color: '#fff',
+                            border: '2px solid #00A3FF'
                         },
 
                         // Default options for specific types

@@ -47,7 +47,7 @@ const IniciarSesion = () => {
                     {...register("email", { required: true })}
                     type="email"
                     placeholder="ingresa tu email"
-                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
+                    className="bg-negro mt-4 p-2 font-medium text-blanco placeholder:text-xs placeholder:italic placeholder:font-regular rounded-md border-2 border-gris placeholder-gris text-sm"
                 />
                 <p className="text-rojo text-xs text-left font-medium">
                     {errors.email?.type === "required" &&
@@ -64,7 +64,7 @@ const IniciarSesion = () => {
                         },
                     })}
                     placeholder="Ingresa tu contraseña"
-                    className="bg-blanco mt-4 p-2 font-medium text-negro placeholder:text-xs placeholder:italic placeholder:font-light  rounded-md border-1 border-celeste placeholder-gris text-sm"
+                    className="bg-negro mt-4 p-2 font-medium text-blanco placeholder:text-xs placeholder:italic placeholder:font-regular rounded-md border-2 border-gris placeholder-gris text-sm"
                 />
                 {errors.password && <p className="text-rojo text-xs text-left font-medium">{errors.password.message}</p>}
                 <p className="text-rojo text-xs text-left font-medium">
@@ -74,8 +74,8 @@ const IniciarSesion = () => {
                 {errorMessage && (
                     <p className="text-rojo text-xs text-left font-medium">{errorMessage}</p>
                 )}
-                <p className="text-sm mt-10 font-regular">¿No tienes una cuenta? <Link className="text-celeste font-medium" to='/crear-cuenta'>Ingresa aquí</Link>.</p>
-                <Button type="submit" className="m-10 bg-negro text-blanco w-fit mx-auto rounded-md hover:bg-blanco border-2 border-negro hover:text-negro">
+                <p className="text-sm mt-10 text-grisClaro font-regular">¿No tienes una cuenta? <Link className="text-celeste font-medium" to='/crear-cuenta'>Ingresa aquí</Link>.</p>
+                <Button type="submit" className="flex m-12 p-2 px-3 w-fit mx-auto text-negro font-titulos font-regular bg-blanco border-blanco border-2 rounded-lg hover:bg-negro hover:text-blanco duration-200">
                     Enviar
                 </Button>
             </form>

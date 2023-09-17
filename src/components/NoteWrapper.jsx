@@ -1,11 +1,14 @@
 import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DummyNotes from '../DummyNotes'
 import { Link } from 'react-router-dom'
 import NoteItem from './NoteItem'
 
-const Notes = ({ notes }) => {
+
+const NoteWrapper = ({ notes, deleteNote, editNote }) => {
+
+
     return (
         <div className='mt-32 mx-2'>
             <header>
@@ -25,4 +28,4 @@ const Notes = ({ notes }) => {
     )
 }
 
-export default Notes
+export default NoteWrapper
