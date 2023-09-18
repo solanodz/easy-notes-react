@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Button } from '@nextui-org/react';
 import { useState } from 'react';
-import { ComponenteFecha, ComponenteTiempo } from './FechaHora';
 
 const TodoForm = ({ addTodo }) => {
     const [value, setValue] = useState('');
@@ -10,7 +9,7 @@ const TodoForm = ({ addTodo }) => {
         e.preventDefault();
 
         // Obtén la fecha y hora actual
-        const createdAt = new Date();
+        const createdAt = new Date().toLocaleDateString();
 
         // Llama a addTodo con el texto de la tarea y la fecha de creación
         addTodo(value, createdAt);
@@ -22,8 +21,7 @@ const TodoForm = ({ addTodo }) => {
         <div className='mt-32 mx-2' onSubmit={handleSubmit}>
             <h1 className="font-titulos pb-4 text-blanco font-semibold text-5xl">To-do</h1>
             <div className='text-left text-sm my-6'>
-                <p className='text-grisClaro text-lg'>{<ComponenteFecha />}</p>
-                <p className='text-grisClaro'>{<ComponenteTiempo />}</p>
+                <p className='text-grisClaro text-lg'>{<dateHour />}</p>
             </div>
             <form className='w-full text-blanco flex items-center flex-row h-fit mb-12 mt-6'>
                 <input

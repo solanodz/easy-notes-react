@@ -1,34 +1,45 @@
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@nextui-org/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
-import { ComponenteFecha, ComponenteTiempo } from './FechaHora'
+import { db } from '../firebase/config'
+import { addDoc, collection } from 'firebase/firestore'
 
-const CreateNote = () => {
+const CreateNote = ({ setNotes }) => {
 
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const date = ComponenteFecha();
-    const hour = ComponenteTiempo();
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
     const navigate = useNavigate();
-    const [notes, setNotes] = useState([])
 
-    const handleSubmit = (e) => {
+    const [value, setValue] = useState('');
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (title && description) {
-            const note = { id: uuid(), title, description, date, hour }
-            // add this note to the note array
-            setNotes(prevNotes => [note, ...prevNotes])
+        // Obtén la fecha y hora actual
+        const createdAt = new Date()
 
-            // redirect to My Notes
-            navigate('/notes')
+        // Guarda la nota con la fecha y hora actual
+        if (title && description) {
+            const note = { id: uuid(), title, description, createdAt };
+
+            try {
+                await addDoc(collection(db, 'notes'), note)
+                setNotes((prevNotes) => [note, ...prevNotes]);
+
+                // Limpia los campos de entrada
+                setValue('');
+                setTitle('');
+                setDescription('');
+                // redirect to My Notes
+                navigate('/notes')
+
+            } catch (error) {
+                console.error(' Ocurrio un error al intentar agregar la nota a firestore: ', error)
+            }
         }
     }
-
-
 
     return (
         <div className='mt-32 mx-2'>
@@ -42,9 +53,9 @@ const CreateNote = () => {
                     Guardar
                 </Button>
             </header>
-            <form action="" className='flex flex-col' onSubmit={handleSubmit}>
+            <form action="" className='flex flex-col text-blanco' onSubmit={handleSubmit}>
                 <input
-                    className='bg-gris text-blanco placeholder:italic placeholder:text-md p-2 rounded-md m-2'
+                    className='bg-negro h-full text-2xl p-2 outline-none mt-12 rounded-md m-2'
                     type="text"
                     placeholder='Titulo'
                     value={title}
@@ -52,17 +63,16 @@ const CreateNote = () => {
                 />
                 <textarea
                     name=""
-                    className='bg-gris text-blanco placeholder:italic placeholder:text-md p-2 rounded-md m-2'
+                    className='bg-negro text-sm font-light px-2 pt-1 outline-none rounded-md m-2'
                     placeholder='Descripcion de la nota...'
                     id=""
-                    cols="30"
+                    cols="100"
                     rows="10"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
             </form>
-        </div>
+        </div >
     )
 }
-
 export default CreateNote

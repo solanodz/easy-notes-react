@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Hero from './components/Hero'
 import { NextUIProvider } from '@nextui-org/react'
@@ -11,12 +11,16 @@ import Dashboard from './routes/Dashboard.jsx'
 import TodoWrapper from './components/TodoWrapper.jsx'
 import EditNote from './components/EditNote.jsx'
 import CreateNote from './components/CreateNote.jsx'
-import NoteWrapper from './components/NoteWrapper'
+import Notes from './components/Notes'
 
 function App() {
 
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || [])
   console.log(notes)
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes))
+  }, [notes])
 
   return (
     <div>
@@ -30,8 +34,8 @@ function App() {
             <Route exact path='/iniciar-sesion' element={<IniciarSesion />} />
             <Route exact path='/dashboard' element={<Dashboard />} />
             <Route exact path='/to-do' element={<TodoWrapper />} />
-            <Route exact path='/notes' element={<NoteWrapper notes={notes} />} />
-            <Route exact path='/edit-note/' element={<EditNote />} />
+            <Route exact path='/notes' element={<Notes notes={notes} />} />
+            <Route exact path='/edit-note/:id' element={<EditNote notes={notes} setNotes={setNotes} />} />
             <Route exact path='/create-note' element={<CreateNote setNotes={setNotes} />} />
 
           </Routes>

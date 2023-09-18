@@ -1,14 +1,15 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
 
 const NoteItem = ({ note }) => {
+
+    const createdAt = new Date(note.createdAt);
+    const formattedDateTime = createdAt.toLocaleString();
     return (
-        <div className='py-2 px-3 m-2 bg-negro border-2  border-gris text-blanco rounded-md' >
-            <Link Link to={`/edit-note/${note.id}`}>
-                <p className='text-gris pb-2 text-sm text-right'>{note.date}</p>
-                <h3 className='text-xl w-full font-medium text-left'>{note.title.length > 50 ? (note.title.substr(0, 50)) + '...' : note.title}</h3>
-            </Link >
-        </div >
+        <Link to={`/edit-note/${note.id}`} className=' py-2 px-3 m-2  border-2  border-gris text-blanco rounded-md bg-black hover:bg-negro hover:text-celeste duration-200 '>
+            <p className='text-celesteClaro pb-2 text-xs font-medium text-right'>{formattedDateTime}</p>
+            <h3 className='text-md w-full font-semibold text-left'>{note.title.length > 35 ? (note.title.substr(0, 35)) + '...' : note.title}</h3>
+        </Link >
     )
 }
 

@@ -46,7 +46,7 @@ const Navbar = () => {
                         <Link to="/create-note">Crear Nota</Link>
                     </li>
                     <li className="mx-auto px-12 py-1 rounded-lg w-full text-center my-8 text-3xl hover:text-celeste duration-200">
-                        <Link to="my-notes">Mis Notas</Link>
+                        <Link to="notes">Mis Notas</Link>
                     </li>
                     <li className="mx-auto px-12 py-1 rounded-lg w-full text-center my-8 text-3xl hover:text-celeste duration-200">
                         <Link to="to-do">To-do</Link>
