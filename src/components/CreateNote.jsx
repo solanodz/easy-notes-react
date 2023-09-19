@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@nextui-org/react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { v4 as uuid } from 'uuid'
+// import { v4 as uuid } from 'uuid'
 import { db } from '../firebase/config'
 import { addDoc, collection } from 'firebase/firestore'
 
@@ -22,21 +22,22 @@ const CreateNote = ({ setNotes }) => {
 
         // Guarda la nota con la fecha y hora actual
         if (title && description) {
-            const note = { id: uuid(), title, description, createdAt };
+            // const note = { id: uuid(), title, description, createdAt };
+            const note = { title, description, createdAt };
 
             try {
-                await addDoc(collection(db, 'notes'), note)
-                setNotes((prevNotes) => [note, ...prevNotes]);
+                const docRef = await addDoc(collection(db, 'notes'), note);
+                // Obtener id generado por FS
+                const noteWithId = { ...note, id: docRef.id }
+                setNotes((prevNotes) => [noteWithId, ...prevNotes]);
 
                 // Limpia los campos de entrada
-                setValue('');
                 setTitle('');
                 setDescription('');
                 // redirect to My Notes
-                navigate('/notes')
-
+                navigate('/notes');
             } catch (error) {
-                console.error(' Ocurrio un error al intentar agregar la nota a firestore: ', error)
+                console.error('Error adding note to Firestore: ', error);
             }
         }
     }

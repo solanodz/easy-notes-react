@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import NoteItem from './NoteItem'
 import EditNote from './EditNote'
+import CreateNote from './CreateNote'
 
 const Notes = ({ notes, setNotes }) => {
+
     return (
         <div className='mt-32 mx-2'>
             <header>

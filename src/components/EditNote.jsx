@@ -1,46 +1,61 @@
 import { faArrowLeftLong, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@nextui-org/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { ComponenteFecha, ComponenteTiempo } from './FechaHora'
-import { doc, updateDoc } from 'firebase/firestore'
-import { db } from '../firebase/config'
+import { ComponenteFecha } from './FechaHora'
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
+import { db } from '../firebase/config'; // Asegúrate de importar db correctamente
 
 const EditNote = ({ notes, setNotes }) => {
-    const { id } = useParams()
-    const note = notes.find((item) => item.id == id);
-    const date = <ComponenteFecha />
-    const time = <ComponenteTiempo />
+    const { id } = useParams();
+    const note = notes.find((item) => item.id === id);
+    const date = ComponenteFecha();
     const navigate = useNavigate();
 
     const [title, setTitle] = useState(note ? note.title : '');
     const [description, setDescription] = useState(note ? note.description : '');
 
+    useEffect(() => {
+        setTitle(note ? note.title : '');
+        setDescription(note ? note.description : '');
+    }, [note]);
+
     const handleForm = async (e) => {
         e.preventDefault();
 
         if (title && description && note) {
-            const newNote = { ...note, title, description, date }
+            const updatedNote = {
+                ...note,
+                title,
+                description,
+                date
+            };
 
             try {
-                await updateDoc(doc(db, 'notes', id), { title: 'Updated Title' });
-                const newNotes = notes.map((item => (item.id == id) ? item = newNote : item))
-
-                setNotes(newNotes)
-
-                // redirect to Notes
-                navigate('/notes')
+                await updateDoc(doc(db, 'notes', id), updatedNote);
+                const updatedNotes = notes.map(item => (item.id === id ? updatedNote : item));
+                setNotes(updatedNotes);
             } catch (error) {
-                console.error('Ocurrio un error al intentar editar la nota: ', error)
+                console.error('Error updating note in Firestore: ', error);
             }
         }
+
+        // Redirect to Notes
+        navigate('/notes');
     }
 
-    const handleDelete = () => {
-        const newNotes = notes.filter(item => item.id != id)
-        setNotes(newNotes)
-        navigate('/notes')
+    const handleDelete = async () => {
+        try {
+            // Eliminar la nota de Firestore
+            await deleteDoc(doc(db, 'notes', id));
+
+            const newNotes = notes.filter(item => item.id !== id);
+            setNotes(newNotes);
+            navigate('/notes');
+        } catch (error) {
+            console.error('Error deleting note from Firestore: ', error);
+        }
     }
 
     return (
@@ -57,8 +72,8 @@ const EditNote = ({ notes, setNotes }) => {
                         Guardar
                     </Button>
                     <Button
-                        type='sumit'
-                        onClick={handleDelete}
+                        type='submit'
+                        onClick={handleDelete}  // Cambiado 'sumit' a 'submit'
                         className=" font-medium bg-rojo text-blanco w-fit m-1 rounded-md hover:bg-negro border-2 border-rojo hover:text-rojo"
                     >
                         <FontAwesomeIcon icon={faTrash} />
@@ -89,4 +104,5 @@ const EditNote = ({ notes, setNotes }) => {
     )
 }
 
-export default EditNote
+export default EditNote;
+
