@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/config"
@@ -16,7 +16,7 @@ const CrearCuenta = () => {
     const [, setFormSubmitted] = useState(false)
 
     const [errorMessage, setErrorMessage] = useState("")
-
+    const navigate = useNavigate()
     const onSubmit = async (data) => {
         try {
             const user = await registrarUsuario(data.email, data.password);
@@ -26,6 +26,9 @@ const CrearCuenta = () => {
                 setFormSubmitted(true);
                 reset();
                 notify();
+
+                // redireccionar a mis notas
+                navigate('/notes')
 
             }
         } catch (error) {

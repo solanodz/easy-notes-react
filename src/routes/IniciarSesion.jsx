@@ -1,17 +1,18 @@
 
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Button } from "@nextui-org/react";
 import { useState } from "react";
 
-
 const IniciarSesion = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [errorMessage, setErrorMessage] = useState("")
+    const navigate = useNavigate()
     const onSubmit = (data) => {
         handleLogin(data)
     }
+
     const handleLogin = async (data) => {
         const auth = getAuth();
         try {
@@ -20,6 +21,11 @@ const IniciarSesion = () => {
                 data.email,
                 data.password
             );
+            if (userCredential) {
+                reset()
+                // redireccionar a mis notas
+                navigate('/notes')
+            }
             const user = userCredential.user;
             // You can now handle the logged-in user (e.g., redirect to a dashboard).
             console.log("User logged in:", user);
@@ -29,7 +35,6 @@ const IniciarSesion = () => {
             } else if (error.code === "auth/user-not-found") {
                 setErrorMessage("* Este email no esta registrado")
             }
-            reset()
         }
     };
 
