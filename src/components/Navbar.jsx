@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import "../App.css"
+
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [menuAnimation, setMenuAnimation] = useState('')
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
+        setMenuAnimation(menuOpen ? "slide-out" : "slide-in")
     };
+
 
     return (
         <div
-            className={`z-40 fixed bg-negro top-0 left-0 right-0 bg-white flex justify-between pt-3 flex-col items-center md:justify-center border-celeste ${menuOpen ? "border-b-2" : "hidden:border-b-2"
+            className={`z-40 fixed bg-negro backdrop-blur-sm bg-opacity-75 top-0 left-0 right-0 bg-white flex justify-between pt-3 flex-col items-center ${menuOpen ? "border-b-2" : "hidden:border-b-2"
                 }`}
         >
             <div>
@@ -36,20 +41,20 @@ const Navbar = () => {
             </button>
 
             <div
-                className={`flex flex-col lg:flex-row ${menuOpen ? "flex" : "hidden"} bg-white w-full`}
+                className={`bg-transparent p-6 rounded-lg shadow-lg flex flex-col lg:flex-row ${menuOpen ? "flex" : "hidden"} w-full flex- justify-center`}
             >
-                <ul className=" flex-col font-titulos font-semibold text-blanco text-sm flex justify-between">
-                    <li className="mx-auto px-12 py-1 rounded-lg w-full text-center my-8 text-3xl hover:text-celeste duration-200">
+                <ul className="text-2xl sm:flex-row items-center sm:text-lg flex-col font-titulos font-semibold text-blanco flex justify-between">
+                    <li onClick={() => setMenuOpen(false)} className="mx-auto px-16 sm:px-12 w-max py-1 rounded-lg text-center my-8 sm:my-4 hover:text-celeste duration-200">
                         <Link to="/dashboard">Dashboard</Link>
                     </li>
-                    <li className="mx-auto px-12 py-1 rounded-lg w-full text-center my-8 text-3xl hover:text-celeste duration-200">
+                    <li onClick={() => setMenuOpen(false)} className="mx-auto px-16 sm:px-12 w-max py-1 rounded-lg text-center my-8 sm:my-4 hover:text-celeste duration-200">
                         <Link to="/create-note">Crear Nota</Link>
                     </li>
-                    <li className="mx-auto px-12 py-1 rounded-lg w-full text-center my-8 text-3xl hover:text-celeste duration-200">
-                        <Link to="notes">Mis Notas</Link>
+                    <li onClick={() => setMenuOpen(false)} className="mx-auto px-16 sm:px-12 w-max py-1 rounded-lg text-center my-8 sm:my-4 hover:text-celeste duration-200">
+                        <Link to="/notes">Mis Notas</Link>
                     </li>
-                    <li className="mx-auto px-12 py-1 rounded-lg w-full text-center my-8 text-3xl hover:text-celeste duration-200">
-                        <Link to="to-do">To-do</Link>
+                    <li onClick={() => setMenuOpen(false)} className="mx-auto px-16 sm:px-12 w-max py-1 rounded-lg text-center my-8 sm:my-4 hover:text-celeste duration-200">
+                        <Link to="/to-do">To-do</Link>
                     </li>
                 </ul>
             </div>

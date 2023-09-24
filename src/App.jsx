@@ -26,17 +26,17 @@ function App() {
     <div>
 
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
         <NextUIProvider>
           <Routes>
             <Route exact path='/' element={<Hero />} />
             <Route exact path='/crear-cuenta' element={<CrearCuenta />} />
             <Route exact path='/iniciar-sesion' element={<IniciarSesion />} />
-            <Route exact path='/dashboard' element={<Dashboard />} />
-            <Route exact path='/to-do' element={<TodoWrapper />} />
-            <Route exact path='/notes' element={<Notes notes={notes} />} />
-            <Route exact path='/edit-note/:id' element={<EditNote notes={notes} setNotes={setNotes} />} />
-            <Route exact path='/create-note' element={<CreateNote setNotes={setNotes} />} />
+            <Route exact path='/dashboard' element={<><Dashboard /> <Navbar /></>} />
+            <Route exact path='/to-do' element={<><TodoWrapper /> <Navbar /></>} />
+            <Route exact path='/notes' element={<><Notes notes={notes} /> <Navbar /></>} />
+            <Route exact path='/edit-note/:id' element={<><EditNote notes={notes} setNotes={setNotes} /> <Navbar /></>} />
+            <Route exact path='/create-note' element={<><CreateNote setNotes={setNotes} /> <Navbar /></>} />
 
           </Routes>
         </NextUIProvider>
