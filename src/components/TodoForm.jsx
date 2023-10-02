@@ -8,6 +8,10 @@ const TodoForm = ({ addTodo }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // Verifica si el campo está vacío
+        if (!value.trim()) {
+            return;  // No hagas nada si está vacío
+        }
         // Obtén la fecha y hora actual
         const createdAt = new Date().toLocaleDateString();
 
@@ -19,7 +23,7 @@ const TodoForm = ({ addTodo }) => {
 
     return (
         <div className='mt-32 mx-2' onSubmit={handleSubmit}>
-            <h1 className="font-titulos pb-4 text-blanco font-semibold text-5xl">To-do</h1>
+            <h1 className="font-titulos pt-12 pb-4 text-blanco font-semibold text-4xl">To-do</h1>
             <div className='text-left text-sm my-6'>
                 <p className='text-grisClaro text-lg'>{<dateHour />}</p>
             </div>

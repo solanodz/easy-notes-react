@@ -54,7 +54,7 @@ const EditNote = ({ notes, setNotes }) => {
     }
 
     return (
-        <div className='mt-32 mx-2'>
+        <div className='mt-40 mx-2'>
             <header className='flex justify-between w-full'>
                 <Link to='/notes'><FontAwesomeIcon className='bg-gris text-blanco p-3 rounded-md m-2' icon={faArrowLeftLong} /></Link>
 

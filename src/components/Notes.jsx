@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import NoteItem from './NoteItem'
 import { useEffect, useState } from 'react';
-import DarkModeToggle from "../DarkMode/DarkModeToggle";
 import logoBlanco from '../assets/blanco.png';
 import logoNegro from '../assets/negro.png';
 

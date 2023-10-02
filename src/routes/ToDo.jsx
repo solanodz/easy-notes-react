@@ -9,17 +9,10 @@ import { useEffect, useState } from 'react'
 const ToDo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
 
     const FechaCreacion = ({ createdAt }) => {
-        const [horaCreacion, setHoraCreacion] = useState('');
-
-        useEffect(() => {
-            const hora = new Date(createdAt).toLocaleTimeString();
-            setHoraCreacion(hora);
-        }, [createdAt]);
 
         return (
             <div className='flex flex-col text-right text-grisClaro py-1 text-xs font-titulos'>
                 <p className='mx-2'>{new Date(createdAt).toLocaleDateString()}</p>
-                <p className='mx-2'>{horaCreacion}</p>
             </div>
         );
     }
@@ -51,8 +44,6 @@ const ToDo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
                             onClick={() => deleteTodo(task.id)}
                         />
                     </div>
-
-
                 </div>
             </div>
 

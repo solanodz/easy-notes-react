@@ -52,10 +52,9 @@ const IniciarSesion = () => {
     return (
         <div className={`max-w-lg pb-12 h-full mx-auto ${bgTheme} duration-200`}>
             <div className="flex flex-row justify-around">
-                <Link to="/"><img src={logoTheme} alt="Logo EN." className="w-20" /></Link>
-                <DarkModeToggle darkMode={darkMode} onToggleDarkMode={onToggleDarkMode} />
+                <Link to="/"><img src={logoTheme} alt="Logo EN." className="w-24 mt-12" /></Link>
             </div>
-            <h1 className="font-titulos pt-24 pb-4 text-celeste font-semibold text-4xl">
+            <h1 className="font-titulos pt-16 pb-4 text-celeste font-semibold text-4xl">
                 Iniciar Sesión
             </h1>
             <form
@@ -67,7 +66,7 @@ const IniciarSesion = () => {
                     {...register("email", { required: true })}
                     type="email"
                     placeholder="ingresa tu email"
-                    className={`bg-${darkMode ? 'negro' : 'blanco'} mt-4 p-2 font-medium text-${darkMode ? 'blanco' : 'negro'} placeholder:text-xs placeholder:italic placeholder:font-light rounded-md border border-gris placeholder-grisClaro text-sm duration-200`}
+                    className={`bg-negro mt-4 p-2 font-medium texblanco placeholder:text-xs placeholder:italic placeholder:font-light rounded-md border border-gris placeholder-grisClaro text-sm duration-200`}
                 />
                 <p className="text-rojo text-xs text-left font-medium">
                     {errors.email?.type === "required" &&
@@ -84,7 +83,7 @@ const IniciarSesion = () => {
                         },
                     })}
                     placeholder="Ingresa tu contraseña"
-                    className={`bg-${darkMode ? 'negro' : 'blanco'} mt-4 p-2 font-medium text-${darkMode ? 'blanco' : 'negro'} placeholder:text-xs placeholder:italic placeholder:font-light rounded-md border border-gris placeholder-grisClaro text-sm duration-200`}
+                    className={`bg-negro mt-4 p-2 font-medium texblanco placeholder:text-xs placeholder:italic placeholder:font-light rounded-md border border-gris placeholder-grisClaro text-sm duration-200`}
                 />
                 {errors.password && <p className="text-rojo text-xs text-left font-medium">{errors.password.message}</p>}
                 <p className="text-rojo text-xs text-left font-medium">
