@@ -12,8 +12,10 @@ import TodoWrapper from './components/TodoWrapper.jsx'
 import EditNote from './components/EditNote.jsx'
 import CreateNote from './components/CreateNote.jsx'
 import Notes from './components/Notes'
+import DarkModeToggle from './DarkMode/DarkModeToggle'
 
 function App() {
+  const [darkMode, setDarkMode] = useState(true);
 
   const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || [])
   console.log(notes)
@@ -29,12 +31,12 @@ function App() {
         {/* <Navbar /> */}
         <NextUIProvider>
           <Routes>
-            <Route exact path='/' element={<Hero />} />
-            <Route exact path='/crear-cuenta' element={<CrearCuenta />} />
-            <Route exact path='/iniciar-sesion' element={<IniciarSesion />} />
-            <Route exact path='/dashboard' element={<><Dashboard /> <Navbar /></>} />
-            <Route exact path='/to-do' element={<><TodoWrapper /> <Navbar /></>} />
-            <Route exact path='/notes' element={<><Notes notes={notes} /> <Navbar /></>} />
+            <Route exact path='/' element={<><Hero /></>} />
+            <Route exact path='/crear-cuenta' element={<><CrearCuenta /></>} />
+            <Route exact path='/iniciar-sesion' element={<><IniciarSesion /> </>} />
+            <Route exact path='/dashboard' element={<> <DarkModeToggle darkMode={darkMode} /><Dashboard /> <Navbar /></>} />
+            <Route exact path='/to-do' element={<> <Navbar /><TodoWrapper /></>} />
+            <Route exact path='/notes' element={<> <Navbar /> <Notes notes={notes} /></>} />
             <Route exact path='/edit-note/:id' element={<><EditNote notes={notes} setNotes={setNotes} /> <Navbar /></>} />
             <Route exact path='/create-note' element={<><CreateNote setNotes={setNotes} /> <Navbar /></>} />
 

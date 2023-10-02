@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { faArrowLeftLong, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@nextui-org/react'
@@ -10,21 +11,17 @@ import { db } from '../firebase/config'; // Asegúrate de importar db correctame
 const EditNote = ({ notes, setNotes }) => {
     const { id } = useParams();
     const note = notes.find((item) => item.id === id);
-    const date = ComponenteFecha();
+    const date = new Date().toLocaleString();
     const navigate = useNavigate();
 
+    const [noteId] = useState(id);  // Use the note ID stored during creation
     const [title, setTitle] = useState(note ? note.title : '');
     const [description, setDescription] = useState(note ? note.description : '');
-
-    useEffect(() => {
-        setTitle(note ? note.title : '');
-        setDescription(note ? note.description : '');
-    }, [note]);
 
     const handleForm = async (e) => {
         e.preventDefault();
 
-        if (title && description && note) {
+        if (title && description && noteId) {
             const updatedNote = {
                 ...note,
                 title,
@@ -33,28 +30,26 @@ const EditNote = ({ notes, setNotes }) => {
             };
 
             try {
-                await updateDoc(doc(db, 'notes', id), updatedNote);
-                const updatedNotes = notes.map(item => (item.id === id ? updatedNote : item));
+                await updateDoc(doc(db, 'notes', noteId), updatedNote);
+                const updatedNotes = notes.map(item => (item.id === noteId ? updatedNote : item));
                 setNotes(updatedNotes);
+                navigate('/notes');
             } catch (error) {
                 console.error('Error updating note in Firestore: ', error);
             }
         }
-
-        // Redirect to Notes
-        navigate('/notes');
     }
 
     const handleDelete = async () => {
-        try {
-            // Eliminar la nota de Firestore
-            await deleteDoc(doc(db, 'notes', id));
-
-            const newNotes = notes.filter(item => item.id !== id);
-            setNotes(newNotes);
-            navigate('/notes');
-        } catch (error) {
-            console.error('Error deleting note from Firestore: ', error);
+        if (window.confirm("¿Estas seguro de que quieres eliminar esta nota?")) {
+            try {
+                await deleteDoc(doc(db, 'notes', noteId));
+                const newNotes = notes.filter(item => item.id !== noteId);
+                setNotes(newNotes);
+                navigate('/notes');
+            } catch (error) {
+                console.error('Error deleting note from Firestore: ', error);
+            }
         }
     }
 

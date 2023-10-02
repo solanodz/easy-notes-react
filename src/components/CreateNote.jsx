@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@nextui-org/react'
@@ -8,28 +9,27 @@ import { db } from '../firebase/config'
 import { addDoc, collection } from 'firebase/firestore'
 
 const CreateNote = ({ setNotes }) => {
-
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const navigate = useNavigate();
-
-    const [value, setValue] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [noteId, setNoteId] = useState(null);  // Nuevo estado para almacenar el ID del documento
+    const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Obtén la fecha y hora actual
-        const createdAt = new Date()
+        const createdAt = new Date();
 
         // Guarda la nota con la fecha y hora actual
         if (title && description) {
-            // const note = { id: uuid(), title, description, createdAt };
             const note = { title, description, createdAt };
 
             try {
                 const docRef = await addDoc(collection(db, 'notes'), note);
-                // Obtener id generado por FS
-                const noteWithId = { ...note, id: docRef.id }
+                const noteWithId = { ...note, id: docRef.id };
                 setNotes((prevNotes) => [noteWithId, ...prevNotes]);
+
+                // Guarda el ID generado para este documento
+                setNoteId(docRef.id);
 
                 // Limpia los campos de entrada
                 setTitle('');

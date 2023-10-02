@@ -28,7 +28,7 @@ const TodoForm = ({ addTodo }) => {
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
                     type="text"
-                    className='bg-gris rounded-md py-2 px-2 my-2 mr-2 placeholder:italic placeholder:text-sm w-full'
+                    className='bg-gris outline-none rounded-md py-2 px-2 my-2 mr-2 placeholder:italic placeholder:text-sm w-full'
                     placeholder='Agrega las tareas de hoy'
                 />
                 <Button
