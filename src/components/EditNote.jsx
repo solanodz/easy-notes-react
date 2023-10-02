@@ -2,9 +2,8 @@
 import { faArrowLeftLong, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button } from '@nextui-org/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { ComponenteFecha } from './FechaHora'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase/config'; // Asegúrate de importar db correctamente
 

@@ -32,12 +32,12 @@ const TodoForm = ({ addTodo }) => {
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
                     type="text"
-                    className='bg-gris outline-none rounded-md py-2 px-2 my-2 mr-2 placeholder:italic placeholder:text-sm w-full'
+                    className='bg-gris outline-none break-before-right rounded-md py-2 px-2 my-2 mr-2 placeholder:italic placeholder:text-sm w-full'
                     placeholder='Agrega las tareas de hoy'
                 />
                 <Button
                     type="submit"
-                    className=" font-medium bg-celeste text-blanco w-fit mx-auto rounded-md hover:bg-blanco border-2 border-celeste hover:text-celeste"
+                    className=" font-medium bg-celeste text-blanco w-fit mx-auto rounded-md hover:bg-negro border-2 border-celeste hover:text-celeste"
                 >
                     Agregar
                 </Button>

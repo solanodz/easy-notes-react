@@ -1,20 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import NoteItem from './NoteItem'
 import { useEffect, useState } from 'react';
-import logoBlanco from '../assets/blanco.png';
-import logoNegro from '../assets/negro.png';
 
 const Notes = ({ notes }) => {
-
-    const [darkMode, setDarkMode] = useState(true);
-    const onToggleDarkMode = (isDarkMode) => {
-        setDarkMode(isDarkMode);
-    };
-    const logoTheme = darkMode ? logoBlanco : logoNegro;
-    const bgTheme = darkMode ? "bg-negro text-blanco" : "bg-blanco text-negro";
 
     const [text, setText] = useState('')
     const [filteredNotes, setFilteredNotes] = useState(notes)
