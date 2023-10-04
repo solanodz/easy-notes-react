@@ -3,24 +3,15 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-// Your web app's Firebase configuration
-const apiKey = import.meta.env.VITE_apiKey;
-const authDomain = import.meta.env.VITE_authDomain;
-const projectId = import.meta.env.VITE_projectId;
-const storageBucket = import.meta.env.VITE_storageBucket;
-const messagingSenderId = import.meta.env.VITE_messagingSenderId;
-const appId = import.meta.env.VITE_appId;
-const measurementId = import.meta.env.VITE_measurementId;
-
-
 const firebaseConfig = {
-    apiKey,
-    authDomain,
-    projectId,
-    storageBucket,
-    messagingSenderId,
-    appId,
-    measurementId,
+    apiKey: "AIzaSyBIH5VmgyaxnuQijbss7i5w7-vqTehk9EU",
+    authDomain: "easy-notes-e2d60.firebaseapp.com",
+    databaseURL: "https://easy-notes-e2d60-default-rtdb.firebaseio.com",
+    projectId: "easy-notes-e2d60",
+    storageBucket: "easy-notes-e2d60.appspot.com",
+    messagingSenderId: "598673059032",
+    appId: "1:598673059032:web:f248c469ae656a53083bad",
+    measurementId: "G-0PKJWGTY3E"
 };
 
 // Initialize Firebase
